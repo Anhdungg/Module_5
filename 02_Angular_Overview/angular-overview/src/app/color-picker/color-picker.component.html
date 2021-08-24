@@ -1,0 +1,41 @@
+<div class="container mt-5" >
+  <div class="row">
+    <div class = col-6>
+      <div class="row">
+        <div class="col">
+          <div class="d-flex">
+            <div class="ml-auto mr-3">
+              <div class="d-flex">
+                <label for="" class="mr-auto ml-auto">{{red}}</label>
+              </div>
+              <input type="range" min="0" max="255" value="0" (change)="setRed($any($event).target.value)">
+              <div style="background-color: red; width: 100%; height: 20px"></div>
+            </div>
+            <div class="ml-3 mr-3">
+              <div class="d-flex">
+                <label for="" class="mr-auto ml-auto">{{green}}</label>
+              </div>
+              <input type="range" min="0" max="255" value="0" (change)="setGreen($any($event).target.value)">
+                <div style="background-color: green; width: 100%; height: 20px"></div>
+            </div>
+            <div class="ml-3 mr-auto">
+              <div class="d-flex">
+                <label for="" class="mr-auto ml-auto">{{blue}}</label>
+              </div>
+              <input type="range" min="0" max="255" value="0" (change)="setBlue($any($event).target.value)">
+              <div style="background-color: blue; width: 100%; height: 20px"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row mt-5">
+        <div class="col d-flex">
+          <div style="height: 200px; width: 100%;" [style.background-color]="color"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+

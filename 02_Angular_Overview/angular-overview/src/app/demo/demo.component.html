@@ -1,0 +1,30 @@
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <div class="card" style="width: 18rem;">
+        <img class="card-img-top" [src]="student.avatar" alt="Card image cap">
+        <div class="card-body">
+          <table>
+            <tr>
+              <th>Name: </th>
+              <td>{{student.name}}</td>
+            </tr>
+            <tr>
+              <th>Age: </th>
+              <td>{{student.age}}</td>
+            </tr>
+            <tr>
+              <th>Mark: </th>
+              <td>{{student.mark}}</td>
+            </tr>
+            <tr>
+              <td colspan="2">
+                <input type="number"  [(ngModel)]="student.mark">
+              </td>
+            </tr>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
