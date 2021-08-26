@@ -1,0 +1,31 @@
+<div class="container">
+  <table class="table table-hover">
+    <thead>
+    <tr>
+      <th>ID</th>
+      <th>Name</th>
+      <th>Age</th>
+      <th>Address</th>
+      <th>Mark</th>
+      <th>Result</th>
+      <th>Action</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let student of listStudent">
+      <td>{{student.id}}</td>
+      <td>{{student.name}}</td>
+      <td>{{student.age}}</td>
+      <td>{{student.address}}</td>
+      <td>{{student.mark}}</td>
+      <td *ngIf="student.mark <= 5" [ngStyle]="{'color': 'red', 'font': 'bold'}" >FAIL</td>
+      <td *ngIf="student.mark > 5" [ngStyle]="{'color': 'green', 'font': 'bold'}">PASS</td>
+      <td>
+        <button class="btn btn-warning">Detail</button>
+        <label>&nbsp;</label>
+        <button class="btn btn-danger">Detail</button>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>
