@@ -1,0 +1,12 @@
+<div class="container-fluid">
+  <h2>Rating Bar</h2>
+  <p><span>Max: </span>{{max}}</p>
+  <p><span>Vote: </span><span *ngIf="vote > 0">{{vote}}</span></p>
+  <div class="cursor" (mouseleave)="reset()">
+    <span *ngFor="let unit of ratingUnit; let i = index">
+      <span *ngIf="i!=0">&nbsp;</span>
+      <i class="fas fa-star star" [style.color]="ratingUnit[i].color" (mouseover)="mouseOver(i)" (click)="voting(i)"></i>
+      <span>&nbsp;</span>
+    </span>
+  </div>
+</div>

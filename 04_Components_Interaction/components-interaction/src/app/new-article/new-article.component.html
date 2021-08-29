@@ -1,0 +1,36 @@
+<div class="container bg-light">
+  <h2>New article</h2>
+  <div class="progress" style="height: 2px;">
+    <div class="progress-bar"  role="progressbar" style="width: 100%;background-color: orangered" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+  </div>
+  <div class="row mt-5 mb-5">
+    <div class="col">
+      <div class="row">
+        <div class="col-6">
+          <div class="d-flex">
+            <label for="" class="mx-auto">Title</label>
+          </div>
+          <div class="d-flex">
+            <textarea  cols="70" id="title" class="mx-auto" [(ngModel)]="title"></textarea>
+          </div>
+        </div>
+        <div class="col-6">
+          <div class="d-flex">
+            <label for="" class="mx-auto">URL</label>
+          </div>
+          <div class="d-flex">
+            <textarea  cols="70" id="url" class="mx-auto" [(ngModel)]="url"></textarea>
+          </div>
+        </div>
+      </div>
+      <div class="row mt-5">
+        <div class="col d-flex">
+          <button class="btn btn-primary mx-auto my-auto" (click)="addArticle()" >Add</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="progress" style="height: 2px;">
+    <div class="progress-bar"  role="progressbar" style="width: 100%;background-color: orangered" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+  </div>
+</div>

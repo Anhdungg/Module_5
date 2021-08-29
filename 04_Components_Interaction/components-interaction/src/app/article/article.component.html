@@ -1,0 +1,16 @@
+<div class="container bg-light" >
+
+  <h2>Today's article</h2>
+  <div class="progress" style="height: 2px;">
+    <div class="progress-bar"  role="progressbar" style="width: 100%;background-color: orangered" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+  </div>
+  <div>
+    <div *ngFor="let art of listArticle">
+      <a href="{{art.url}}" target="_blank">{{art.title}}</a>
+      <app-likes [id]="art.id" [like]="art.like"></app-likes>
+    </div>
+  </div>
+  <div class="progress mt-5" style="height: 2px;">
+    <div class="progress-bar"  role="progressbar" style="width: 100%;background-color: orangered" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+  </div>
+</div>

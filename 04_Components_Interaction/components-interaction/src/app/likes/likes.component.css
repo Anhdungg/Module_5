@@ -1,0 +1,12 @@
+.like{
+  color: #2a68a4;
+  cursor: pointer;
+}
+
+a {
+
+}
+
+a :hover{
+  text-decoration: none;
+}
