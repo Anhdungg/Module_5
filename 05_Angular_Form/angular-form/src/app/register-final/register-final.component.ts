@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import {AbstractControl, FormControl, FormGroup, Validators} from "@angular/forms";
-import {valiAge} from "./ValiAge";
 import {valiPhone} from "./ValiPhone";
 
 interface Country {
@@ -30,7 +29,7 @@ export class RegisterFinalComponent implements OnInit {
       confirmPassword: new FormControl('', [Validators.required, Validators.minLength(6)])
     }, [valiPassword]),
     countryName: new FormControl('', [Validators.required]),
-    age: new FormControl('', [valiAge, Validators.required]),
+    age: new FormControl('', [Validators.min(18), Validators.required]),
     gender: new FormControl('', [Validators.required]),
     phone: new FormControl('', [valiPhone, Validators.required])
   });

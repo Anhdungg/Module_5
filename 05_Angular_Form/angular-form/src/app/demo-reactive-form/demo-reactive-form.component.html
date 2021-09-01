@@ -1,0 +1,47 @@
+<form [formGroup]="studentForm" (ngSubmit)="onSubmit()">
+  <div class="form-group">
+    <label for="idStudent">Id<span class="text-danger">*</span></label>
+    <input type="text" class="form-control" formControlName="id"
+           [ngClass]="student.id?.touched ? (student.id?.invalid ? 'is-invalid' : 'is-valid') : ''" id="idStudent" name="id" ngModel required>
+    <div class="invalid-feedback">
+      Không được để trống trường này!!!
+    </div>
+    <div class="valid-feedback">
+      Đúng yêu cầu
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="nameStudent">Name<span class="text-danger">*</span></label>
+    <input type="text" class="form-control" formControlName="name"
+           [ngClass]="student.name?.touched ? (student.name?.invalid ? 'is-invalid' : 'is-valid') : ''" id="nameStudent" name="name" ngModel required>
+    <div class="invalid-feedback">
+      Không được để trống trường này!!!
+    </div>
+    <div class="valid-feedback">
+      Đúng yêu cầu
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="ageStudent">Age<span class="text-danger">*</span></label>
+    <input type="number" class="form-control" formControlName="age"
+           [ngClass]="student.age?.touched ? (student.age?.invalid ? 'is-invalid' : 'is-valid') : ''" id="ageStudent" name="age" min="18" ngModel required>
+    <div class="invalid-feedback" *ngIf="student.age?.errors?.required">Không được để trống trường này!!!</div>
+    <div class="invalid-feedback" *ngIf="student.age?.errors?.min">Phải lớn hơn 18 tuổi!!!</div>
+    <div class="valid-feedback">
+      Đúng yêu cầu
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="markStudent">Mark<span class="text-danger">*</span></label>
+    <input type="number" class="form-control" formControlName="mark"
+           [ngClass]="student.mark?.touched ? (student.mark?.invalid ? 'is-invalid' : 'is-valid') : ''" id="markStudent" name="mark" ngModel required>
+    <div class="invalid-feedback">
+      Không được để trống trường này!!!
+    </div>
+    <div class="valid-feedback">
+      Đúng yêu cầu
+    </div>
+  </div>
+
+  <button class="btn btn-primary" type="submit">Create</button>
+</form>

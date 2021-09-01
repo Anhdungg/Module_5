@@ -10,6 +10,8 @@ import { RegisterComponent } from './register/register.component';
 import { TodoComponent } from './todo/todo.component';
 import { RegisterFinalComponent } from './register-final/register-final.component';
 import { LoginComponent } from './login/login.component';
+import { DemoTemplateDrivenComponent } from './demo-template-driven/demo-template-driven.component';
+import { DemoReactiveFormComponent } from './demo-reactive-form/demo-reactive-form.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +20,9 @@ import { LoginComponent } from './login/login.component';
     RegisterComponent,
     TodoComponent,
     RegisterFinalComponent,
-    LoginComponent
+    LoginComponent,
+    DemoTemplateDrivenComponent,
+    DemoReactiveFormComponent
   ],
   imports: [
     BrowserModule,

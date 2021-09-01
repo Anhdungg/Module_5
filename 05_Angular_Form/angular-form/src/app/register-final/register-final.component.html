@@ -53,7 +53,7 @@
         </div>
         <div class="alert alert-danger" role="alert" *ngIf="registerForm.controls.age?.invalid && (registerForm.controls.age?.touched || isSubmit)">
           <p *ngIf="registerForm.controls.age?.errors?.required" class="m-0">Age is required!!!</p>
-          <p *ngIf="registerForm.controls.age?.errors?.valiAge" class="m-0">The number should be greater than 18</p>
+          <p *ngIf="registerForm.controls.age?.errors?.min" class="m-0">The number should be greater than 18</p>
         </div>
         <div class="form-group">
           <label>Gender<span style="color: red">*</span></label><br>
