@@ -1,1 +1,95 @@
-<p>create-customer works!</p>
+<p class="h2 text-center mt-4 mb-4"> Create customer</p>
+<div class="container">
+  <form [formGroup]="customerForm" (ngSubmit)="onSubmit()" class="">
+    <div class="row mb-3">
+      <div class="form-group col-md-6">
+        <label for="id">ID <span class="text-danger">*</span></label>
+        <input type="text" class="form-control" id="id" formControlName="id"
+               [ngClass]="(customer.id?.touched || isSubmit) ? (customer.id?.invalid ? 'is-invalid' : 'is-valid') : ''">
+        <div class="invalid-feedback" *ngIf="customer.id?.errors?.required">ID không được để trống</div>
+        <div class="invalid-feedback" *ngIf="customer.id?.errors?.pattern">ID có định dạng KH-XXXX (X là số từ 0-9)</div>
+      </div>
+      <div class="form-group col-md-6">
+        <label for="name">Name <span class="text-danger">*</span></label>
+        <input type="text" class="form-control" id="name" formControlName="name"
+               [ngClass]="(customer.name?.touched || isSubmit) ? (customer.name?.invalid ? 'is-invalid' : 'is-valid') : ''">
+        <div class="invalid-feedback" *ngIf="customer.name?.errors?.required">Name không được để trống</div>
+      </div>
+    </div>
+    <div class="row mb-3">
+      <div class="form-group col-md">
+        <label for="address">Address <span class="text-danger">*</span></label>
+        <input type="text" class="form-control" id="address"  placeholder="1234 Main St" formControlName="address"
+               [ngClass]="(customer.address?.touched || isSubmit) ? (customer.address?.invalid ? 'is-invalid' : 'is-valid') : ''">
+        <div class="invalid-feedback" *ngIf="customer.address?.errors?.required">Address không được để trống</div>
+      </div>
+    </div>
+    <div class="row mb-3">
+      <div class="form-group col-md">
+        <label for="email">Email <span class="text-danger">*</span></label>
+        <input type="email" class="form-control" id="email" placeholder="XXX@xxx.xxx" formControlName="email"
+               [ngClass]="(customer.email?.touched || isSubmit) ? (customer.email?.invalid ? 'is-invalid' : 'is-valid') : ''">
+        <div class="invalid-feedback" *ngIf="customer.email?.errors?.required">Email không được để trống</div>
+        <div class="invalid-feedback" *ngIf="customer.email?.errors?.email">Email sai định dạng</div>
+      </div>
+    </div>
+    <div class="row mb-3">
+      <div class="form-group col-md-6">
+        <label for="idCard">ID Card <span class="text-danger">*</span></label>
+        <input type="text" class="form-control" id="idCard" placeholder="XXXXXXXXX" formControlName="idCard"
+               [ngClass]="(customer.idCard?.touched || isSubmit) ? (customer.idCard?.invalid ? 'is-invalid' : 'is-valid') : ''">
+        <div class="invalid-feedback" *ngIf="customer.idCard?.errors?.required">ID card không được để trống</div>
+        <div class="invalid-feedback" *ngIf="customer.idCard?.errors?.pattern">ID card sai định dạng</div>
+      </div>
+      <div class="form-group col-md-6">
+        <label for="phoneNumber">Phone number <span class="text-danger">*</span></label>
+        <input type="text" class="form-control" id="phoneNumber"  placeholder="XXX" formControlName="phoneNumber"
+               [ngClass]="(customer.phoneNumber?.touched || isSubmit) ? (customer.phoneNumber?.invalid ? 'is-invalid' : 'is-valid') : ''">
+        <div class="invalid-feedback" *ngIf="customer.phoneNumber?.errors?.required">Phone number không được để trống</div>
+        <div class="invalid-feedback" *ngIf="customer.phoneNumber?.errors?.pattern">Phone number sai định dạng</div>
+      </div>
+    </div>
+    <div class="row mb-3">
+      <div class="form-group col-md-2">
+        <label>Gender <span class="text-danger">*</span></label>
+        <div>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" id="male" name="gender" value="1" formControlName="gender"
+                   [ngClass]="(customer.gender?.touched || isSubmit) ? (customer.gender?.invalid ? 'is-invalid' : 'is-valid') : ''">
+            <label class="form-check-label" for="male">Male</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" id="female" name="gender" value="0" formControlName="gender"
+                   [ngClass]="(customer.gender?.touched || isSubmit) ? (customer.gender?.invalid ? 'is-invalid' : 'is-valid') : ''">
+            <label class="form-check-label" for="female">Female</label>
+          </div>
+          <div class="invalid" *ngIf="customer.gender?.invalid && customer.gender?.errors?.required && isSubmit">Hãy chọn giới tính</div>
+        </div>
+      </div>
+      <div class="form-group col-md-3">
+        <label for="dayOfBirth">Date of birth <span class="text-danger">*</span></label>
+        <input type="date" class="form-control" id="dayOfBirth" formControlName="dateOfBirth"
+               [ngClass]="(customer.dateOfBirth?.touched || isSubmit) ? (customer.dateOfBirth?.invalid ? 'is-invalid' : 'is-valid') : ''">
+        <div class="invalid-feedback" *ngIf="customer.dateOfBirth?.errors?.required">Date of birth không được để trống</div>
+      </div>
+      <div class="form-group col-md-7">
+        <label for="type">Type <span class="text-danger">*</span></label>
+        <select  id="type" class="form-select" formControlName="customerType"
+                 [ngClass]="(customer.customerType?.touched || isSubmit) ? (customer.customerType?.invalid ? 'is-invalid' : 'is-valid') : ''">
+          <option selected disabled value="">Choose...</option>
+          <option value="Diamond">Diamond</option>
+          <option value="Platinium">Platinium</option>
+          <option value="Gold">Gold</option>
+          <option value="Silver">Silver</option>
+          <option value="Member">Member</option>
+        </select>
+        <div class="invalid-feedback" *ngIf="customer.customerType?.errors?.required">Hãy chọn loại khách hàng</div>
+      </div>
+    </div>
+    <div class="d-flex mt-4">
+      <a class="btn btn-secondary ms-auto me-1">Back</a>
+      <button type="submit" class="btn btn-primary ms-1 me-auto">Create</button>
+    </div>
+  </form>
+  <pre>{{customerForm.value | json}}</pre>
+</div>
