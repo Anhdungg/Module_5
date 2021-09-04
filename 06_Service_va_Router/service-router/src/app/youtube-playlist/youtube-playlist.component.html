@@ -1,0 +1,15 @@
+<div class="border bg-white overflow-auto" id="scroll" style="height: 523px">
+  <p class="mt-2 ml-3 mb-4" style="font-weight: 500">YOUR PLAYLIST</p>
+  <div style="height: 61px;" class="pl-3 pt-1 pb-1 d-flex item" *ngFor="let item of listVideo" routerLinkActive="bg-secondary">
+    <img [src]="item.image" alt="" class="h-100">
+    <div class="ml-1">
+      <a [routerLink]="['/music', item.id]" >
+        <div class="text-custom "  style="" title="{{item.title}}">
+          {{item.title}}
+        </div>
+      </a>
+      <div class="text-secondary" style="font-size: 0.7rem; font-weight: 500">{{item.author}}</div>
+    </div>
+
+  </div>
+</div>
