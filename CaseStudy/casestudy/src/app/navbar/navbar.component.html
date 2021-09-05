@@ -9,44 +9,17 @@
         <li class="nav-item">
           <a class="nav-link " aria-current="page" routerLink="/home" [routerLinkActive]="['active']">Home</a>
         </li>
-        <li class="nav-item dropdown">
-          <span class="nav-link dropdown-toggle"  data-bs-toggle="dropdown" style="cursor: pointer">
-            Employee
-          </span>
-          <ul class="dropdown-menu" aria-labelledby="navbarDropdown" >
-            <li><a class="dropdown-item active" routerLink="employee/list">Show list</a></li>
-            <li><a class="dropdown-item" routerLink="employee/create" >Add new</a></li>
-          </ul>
+        <li class="nav-item">
+          <a class="nav-link " aria-current="page" routerLink="/employee" [routerLinkActive]="['active']">Employee</a>
         </li>
-        <li class="nav-item dropdown">
-          <span class="nav-link dropdown-toggle"  data-bs-toggle="dropdown" style="cursor: pointer">
-            Customer
-          </span>
-          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <li><a class="dropdown-item" routerLink="customer/list" [routerLinkActive]="['active']">Show list</a></li>
-            <li><a class="dropdown-item" routerLink="customer/create" [routerLinkActive]="['active']">Add new</a></li>
-          </ul>
+        <li class="nav-item">
+          <a class="nav-link " aria-current="page" routerLink="/customer" [routerLinkActive]="['active']">Customer</a>
         </li>
-        <li class="nav-item dropdown">
-          <span class="nav-link dropdown-toggle"  data-bs-toggle="dropdown" style="cursor: pointer">
-            Service
-          </span>
-          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <li><a class="dropdown-item" routerLink="service/list" [routerLinkActive]="['active']">Show list</a></li>
-            <li><a class="dropdown-item" routerLink="service/create" [routerLinkActive]="['active']">Add new</a></li>
-            <li><a class="dropdown-item" routerLink="service/register" [routerLinkActive]="['active']">Register</a></li>
-          </ul>
+        <li class="nav-item">
+          <a class="nav-link " aria-current="page" routerLink="/service" [routerLinkActive]="['active']">Service</a>
         </li>
-        <li class="nav-item dropdown">
-          <span class="nav-link dropdown-toggle" data-bs-toggle="dropdown" style="cursor: pointer">
-            Contract
-          </span>
-          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <li><a class="dropdown-item" routerLink="contract/list" [routerLinkActive]="['active']">Show list contract</a></li>
-            <li><a class="dropdown-item" routerLink="contract/create" [routerLinkActive]="['active']">Add new contract</a></li>
-<!--            <li><a class="dropdown-item" routerLink="contract/register" [routerLinkActive]="['active']">Show list contract detail</a></li>-->
-            <li><a class="dropdown-item" routerLink="contract/create-detail" [routerLinkActive]="['active']">Add new contract detail</a></li>
-          </ul>
+        <li class="nav-item">
+          <a class="nav-link " aria-current="page" routerLink="/contract" [routerLinkActive]="['active']">Contract</a>
         </li>
       </ul>
       <form class="d-flex">

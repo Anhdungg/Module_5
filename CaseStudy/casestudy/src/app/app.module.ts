@@ -10,6 +10,7 @@ import {EmployeeModule} from "./employee/employee.module";
 import {CustomerModule} from "./customer/customer.module";
 import {ServiceModule} from "./service/service.module";
 import {ContractModule} from "./contract/contract.module";
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import {ContractModule} from "./contract/contract.module";
     EmployeeModule,
     CustomerModule,
     ServiceModule,
-    ContractModule
+    ContractModule,
+    NgbModule
   ],
   providers: [],
   bootstrap: [AppComponent]

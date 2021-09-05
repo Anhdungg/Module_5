@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import {FormControl, FormGroup, Validators} from "@angular/forms";
+import {AbstractControl, FormControl, FormGroup, Validators} from "@angular/forms";
+import {CustomerDAOService} from "../../customer-dao.service";
+import {ICustomer} from "../../ICustomer";
+import {ActivatedRoute, Router} from "@angular/router";
+import {ReactiveForm} from "../reactive-form";
 
 @Component({
   selector: 'app-create-customer',
@@ -9,24 +13,30 @@ import {FormControl, FormGroup, Validators} from "@angular/forms";
 export class CreateCustomerComponent implements OnInit {
   customerForm!: FormGroup;
   isSubmit: boolean = false;
-  constructor() { }
+  action: string = 'create';
+
+  constructor(private customerDAO: CustomerDAOService,
+              private router: Router,
+              ) { }
 
   ngOnInit(): void {
-    this.customerForm = new FormGroup({
-        id: new FormControl('', [Validators.required, Validators.pattern('^(KH-)[\\d]{4}$')]),
-        name: new FormControl('', [Validators.required]),
-        dateOfBirth: new FormControl('', [Validators.required]),
-        gender: new FormControl('', [Validators.required]),
-        idCard: new FormControl('', [Validators.required, Validators.pattern('^([\\d]{9}|[\\d]{12})$')]),
-        phoneNumber: new FormControl('', [Validators.required, Validators.pattern('^((\\(84\\)\\+)|(0))((91)|(90))[\\d]{7}$')]),
-        email: new FormControl('', [Validators.required, Validators.email]),
-        address: new FormControl('', [Validators.required]),
-        customerType: new FormControl('', [Validators.required]),
-      });
+    this.customerForm = new ReactiveForm(undefined).formCustomer;
   }
 
-  onSubmit() {
+  onCreate() {
     this.isSubmit = true;
+    if(this.customerForm.valid){
+      this.customerDAO.save(new ICustomer(this.customer.id.value, this.customer.name.value, this.customer.dateOfBirth.value,
+        this.customer.gender.value, this.customer.idCard.value, this.customer.phoneNumber.value, this.customer.email.value,
+        this.customer.address.value, this.customer.customerType.value));
+      this.customerDAO.statusSuccess = 'create';
+      this.router.navigate(['/customer/list']);
+
+    }
+  }
+
+  onUpdate(){
+    console.log(":((((");
   }
 
   get customer(){
