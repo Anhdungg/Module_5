@@ -11,6 +11,9 @@ import {CustomerModule} from "./customer/customer.module";
 import {ServiceModule} from "./service/service.module";
 import {ContractModule} from "./contract/contract.module";
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import {NgxPaginationModule} from "ngx-pagination";
+import {HttpClientModule} from "@angular/common/http";
+import {ReactiveFormsModule} from "@angular/forms";
 
 @NgModule({
   declarations: [
@@ -19,15 +22,18 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     NavbarComponent,
     FooterComponent,
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    EmployeeModule,
-    CustomerModule,
-    ServiceModule,
-    ContractModule,
-    NgbModule
-  ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        EmployeeModule,
+        CustomerModule,
+        ServiceModule,
+        ContractModule,
+        NgbModule,
+        HttpClientModule,
+        NgxPaginationModule,
+        ReactiveFormsModule
+    ],
   providers: [],
   bootstrap: [AppComponent]
 })

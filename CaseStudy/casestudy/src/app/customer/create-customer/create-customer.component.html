@@ -6,11 +6,13 @@
       <div class="form-group col-md-6">
         <label for="id">ID <span class="text-danger">*</span></label>
         <input type="text" class="form-control" id="id" formControlName="id"  *ngIf="action == 'create'"
-               [ngClass]="(customer.id?.touched || isSubmit) ? (customer.id?.invalid ? 'is-invalid' : 'is-valid') : ''">
+               [ngClass]="(customer.id?.touched || isSubmit) ? (customer.id?.invalid || existsId ? 'is-invalid' : 'is-valid') : ''">
         <input type="text" class="form-control" id="id" formControlName="id"  *ngIf="action == 'edit'" readonly
-               [ngClass]="(customer.id?.touched || isSubmit) ? (customer.id?.invalid ? 'is-invalid' : 'is-valid') : ''">
+               [ngClass]="(customer.id?.touched || isSubmit) ? (customer.id?.invalid || existsId ? 'is-invalid' : 'is-valid') : ''">
         <div class="invalid-feedback" *ngIf="customer.id?.errors?.required">ID không được để trống</div>
         <div class="invalid-feedback" *ngIf="customer.id?.errors?.pattern">ID có định dạng KH-XXXX (X là số từ 0-9)</div>
+<!--        <div class="invalid-feedback" *ngIf="customer.id?.errors?.existsId">ID đã tồn tại</div>-->
+        <div class="invalid-feedback" *ngIf="existsId">ID đã tồn tại</div>
       </div>
       <div class="form-group col-md-6">
         <label for="name">Name <span class="text-danger">*</span></label>
@@ -78,14 +80,10 @@
       </div>
       <div class="form-group col-md-7">
         <label for="type">Type <span class="text-danger">*</span></label>
-        <select  id="type" class="form-select" formControlName="customerType"
+        <select  id="type" class="form-select" formControlName="customerType" [compareWith]="compareFn"
                  [ngClass]="(customer.customerType?.touched || isSubmit) ? (customer.customerType?.invalid ? 'is-invalid' : 'is-valid') : ''">
           <option selected disabled value="">Choose...</option>
-          <option value="Diamond">Diamond</option>
-          <option value="Platinium">Platinium</option>
-          <option value="Gold">Gold</option>
-          <option value="Silver">Silver</option>
-          <option value="Member">Member</option>
+          <option *ngFor="let customerType of listCustomerType" [ngValue]="customerType" >{{customerType.name}}</option>
         </select>
         <div class="invalid-feedback" *ngIf="customer.customerType?.errors?.required">Hãy chọn loại khách hàng</div>
       </div>

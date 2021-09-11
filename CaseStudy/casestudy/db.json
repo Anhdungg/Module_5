@@ -1,0 +1,276 @@
+{
+  "customerType": [
+    {
+      "id": 1,
+      "name": "Diamond"
+    },
+    {
+      "id": 2,
+      "name": "Platinium"
+    },
+    {
+      "id": 3,
+      "name": "Gold"
+    },
+    {
+      "id": 4,
+      "name": "Silver"
+    },
+    {
+      "id": 5,
+      "name": "Member"
+    }
+  ],
+  "customer": [
+    {
+      "id": "KH-0001",
+      "name": "Le Van Anh Dung",
+      "dateOfBirth": "1997-11-05",
+      "gender": false,
+      "idCard": "184209423",
+      "phoneNumber": "0917937297",
+      "email": "ledung.ht17@gmail.com",
+      "address": "55, Hoang Ke Viem Ngu Hanh Son, Da Nang",
+      "customerType": {
+        "id": 1,
+        "name": "Diamond"
+      }
+    },
+    {
+      "id": "KH-0002",
+      "name": "Anh Dũng",
+      "dateOfBirth": "1998-09-10",
+      "gender": "true",
+      "idCard": "212388701",
+      "phoneNumber": "0917937297",
+      "email": "ledung.ht17@gmail.com",
+      "address": "04, hoàng sỹ khải, đà nẵng",
+      "customerType": {
+        "id": 1,
+        "name": "Diamond"
+      }
+    },
+    {
+      "id": "KH-0003",
+      "name": "Dũng Lê",
+      "dateOfBirth": "2001-09-10",
+      "gender": "true",
+      "idCard": "212388702",
+      "phoneNumber": "0917938289",
+      "email": "ledung.ht17@gmail.com",
+      "address": "41, hoàng sỹ khải, đà nẵng",
+      "customerType": {
+        "id": 3,
+        "name": "Gold"
+      }
+    },
+    {
+      "id": "KH-0004",
+      "name": "Dũng Lê",
+      "dateOfBirth": "1972-09-10",
+      "gender": "true",
+      "idCard": "212388701",
+      "phoneNumber": "0917937297",
+      "email": "ledung.ht17@gmail.com",
+      "address": "22, hoàng sỹ khải, đà nẵng",
+      "customerType": {
+        "id": 2,
+        "name": "Platinium"
+      }
+    },
+    {
+      "id": "KH-0007",
+      "name": "Anh Dũng",
+      "dateOfBirth": "1998-09-12",
+      "gender": "true",
+      "idCard": "212388705",
+      "phoneNumber": "0917937297",
+      "email": "ledung.ht17@gmail.com",
+      "address": "04, hoàng sỹ khải, đà nẵng",
+      "customerType": {
+        "id": 3,
+        "name": "Gold"
+      }
+    },
+    {
+      "id": "KH-0011",
+      "name": "Anh Dũng",
+      "dateOfBirth": "1999-09-11",
+      "gender": "true",
+      "idCard": "212388701",
+      "phoneNumber": "0917937297",
+      "email": "ledung.ht17@gmail.com",
+      "address": "04, hoàng sỹ khải, đà nẵng",
+      "customerType": {
+        "id": 1,
+        "name": "Diamond"
+      }
+    },
+    {
+      "id": "KH-0010",
+      "name": "Van Kien",
+      "dateOfBirth": "1997-09-01",
+      "gender": "true",
+      "idCard": "123456789",
+      "phoneNumber": "0917894565",
+      "email": "vankien@gmail.com",
+      "address": "Nghe An",
+      "customerType": {
+        "id": 2,
+        "name": "Platinium"
+      }
+    }
+  ],
+  "position": [
+    {
+      "id": 1,
+      "name": "Lễ tân"
+    },
+    {
+      "id": 2,
+      "name": "Phục vụ"
+    },
+    {
+      "id": 3,
+      "name": "Chuyên viên"
+    },
+    {
+      "id": 4,
+      "name": "Giám sát"
+    },
+    {
+      "id": 5,
+      "name": "Quản lý"
+    },
+    {
+      "id": 6,
+      "name": "Giám đốc"
+    }
+  ],
+  "educationDegree": [
+    {
+      "id": 1,
+      "name": "Trung cấp"
+    },
+    {
+      "id": 2,
+      "name": "Cao đẳng"
+    },
+    {
+      "id": 3,
+      "name": "Đại học"
+    },
+    {
+      "id": 4,
+      "name": "Sau đại học"
+    }
+  ],
+  "division": [
+    {
+      "id": 1,
+      "name": "Sale-Marketing"
+    },
+    {
+      "id": 2,
+      "name": "Hành chính"
+    },
+    {
+      "id": 3,
+      "name": "Phục vụ"
+    },
+    {
+      "id": 4,
+      "name": "Quản lý"
+    }
+  ],
+  "employee": [
+    {
+      "id": "NV-0001",
+      "name": "Mai Thi Thanh",
+      "dateOfBirth": "1977-08-31",
+      "idCard": "111222333",
+      "salary": "5000000",
+      "phoneNumber": "0914444446",
+      "email": "maithanh@gmail.com",
+      "address": "Ha Tinh",
+      "position": {
+        "id": 6,
+        "name": "Giám đốc"
+      },
+      "educationDegree": {
+        "id": 4,
+        "name": "Sau đại học"
+      },
+      "division": {
+        "id": 4,
+        "name": "Quản lý"
+      }
+    },
+    {
+      "id": "NV-0002",
+      "name": "Anh Dũng",
+      "dateOfBirth": "1997-09-11",
+      "idCard": "212388701",
+      "salary": "2000000",
+      "phoneNumber": "0917937297",
+      "email": "ledung.ht17@gmail.com",
+      "address": "Da Nang",
+      "position": {
+        "id": 5,
+        "name": "Quản lý"
+      },
+      "educationDegree": {
+        "id": 3,
+        "name": "Đại học"
+      },
+      "division": {
+        "id": 2,
+        "name": "Hành chính"
+      }
+    },
+    {
+      "id": "NV-0003",
+      "name": "Le Dao",
+      "dateOfBirth": "1995-02-11",
+      "idCard": "111222111",
+      "salary": "10000000",
+      "phoneNumber": "0916549872",
+      "email": "ledao@gmail.com",
+      "address": "Ha Tinh",
+      "position": {
+        "id": 4,
+        "name": "Giám sát"
+      },
+      "educationDegree": {
+        "id": 2,
+        "name": "Cao đẳng"
+      },
+      "division": {
+        "id": 2,
+        "name": "Hành chính"
+      }
+    },
+    {
+      "id": "NV-0004",
+      "name": "Xuan Son",
+      "dateOfBirth": "1998-01-11",
+      "idCard": "123123129",
+      "salary": "10000000",
+      "phoneNumber": "0916549872",
+      "email": "xuanson@gmail.com",
+      "address": "Da Nang",
+      "position": {
+        "id": 1,
+        "name": "Lễ tân"
+      },
+      "educationDegree": {
+        "id": 1,
+        "name": "Trung cấp"
+      },
+      "division": {
+        "id": 3,
+        "name": "Phục vụ"
+      }
+    }
+  ]
+}

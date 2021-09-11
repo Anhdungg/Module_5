@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {ShareServiceService} from "../../share-service.service";
 
 @Component({
   selector: 'app-create-service',
@@ -6,10 +7,9 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./create-service.component.css']
 })
 export class CreateServiceComponent implements OnInit {
-
-  constructor() { }
+  constructor(private shareService: ShareServiceService) { }
 
   ngOnInit(): void {
+    this.shareService.placeholderSearch = 'Search name service';
   }
-
 }

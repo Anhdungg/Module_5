@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
 import {FormGroup} from "@angular/forms";
-import {CustomerDAOService} from "../../customer-dao.service";
-import {ReactiveForm} from "../reactive-form";
-import {ICustomer} from "../../ICustomer";
+import {CustomerDAOService} from "../customer-dao.service";
+import {ReactiveForm} from "../../reactive-form";
+import {ICustomer} from "../ICustomer";
+import {ICustomerType} from "../icustomer-type";
+import {ShareServiceService} from "../../share-service.service";
 
 @Component({
   selector: 'app-edit-customer',
@@ -11,28 +13,32 @@ import {ICustomer} from "../../ICustomer";
   styleUrls: ['./edit-customer.component.css']
 })
 export class EditCustomerComponent implements OnInit {
+  listCustomerType!: ICustomerType[];
   customerForm!: FormGroup;
   isSubmit: boolean = false;
   action: string = 'edit';
+  existsId: boolean = false;
 
   constructor(private route: ActivatedRoute,
               private router: Router,
-              private customerDAO: CustomerDAOService) { }
+              private customerDAO: CustomerDAOService,
+              private shareService: ShareServiceService) { }
 
   ngOnInit(): void {
+    this.shareService.placeholderSearch = 'Search name customer';
+    this.customerDAO.findAllCustomerType().subscribe((value) => {this.listCustomerType = value});
     this.route.queryParams.subscribe(param => {
       if (param.id != undefined){
-        let customer = this.customerDAO.findById(param.id);
-        if (customer != undefined){
-          this.customerForm = new ReactiveForm(customer).formCustomer;
-        }else{
-          this.router.navigate(['/customer/list']);
-        }
+        this.customerDAO.findById(param.id).subscribe((data: ICustomer) => {
+          let reactiveForm: ReactiveForm = new ReactiveForm();
+          reactiveForm.setFormCustomer(data);
+          this.customerForm = reactiveForm.formCustomer;
+        },
+          error => this.router.navigate(['/customer/list']));
       }else {
         this.router.navigate(['/customer/list']);
       }
-
-    })
+    });
   }
 
   get customer(){
@@ -44,12 +50,18 @@ export class EditCustomerComponent implements OnInit {
     if (this.customerForm.valid){
       this.customerDAO.update( new ICustomer(this.customer.id.value, this.customer.name.value, this.customer.dateOfBirth.value,
         this.customer.gender.value, this.customer.idCard.value, this.customer.phoneNumber.value, this.customer.email.value,
-        this.customer.address.value, this.customer.customerType.value))
+        this.customer.address.value, this.customer.customerType.value)).subscribe(next => {
+        this.customerDAO.statusSuccess = 'edit';
+        this.router.navigate(['/customer/list']);
+      },error => (this.existsId = true))
     }
-    this.customerDAO.statusSuccess = 'edit';
-    this.router.navigate(['/customer/list']);
+
   }
   onCreate() {
 
+  }
+
+  compareFn(c1: ICustomer, c2: ICustomer): boolean {
+    return c1 && c2 ? c1.id === c2.id : c1 === c2;
   }
 }

@@ -1,9 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import {CustomerDAOService} from "../../customer-dao.service";
-import {ICustomer} from "../../ICustomer";
-import { Modal } from 'bootstrap';
+import {Component, DoCheck, OnInit} from '@angular/core';
+import {CustomerDAOService} from "../customer-dao.service";
+import {ICustomer} from "../ICustomer";
 import * as $ from "jquery";
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import {ShareServiceService} from "../../share-service.service";
 
 
 @Component({
@@ -11,17 +10,18 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
   templateUrl: './list-customer.component.html',
   styleUrls: ['./list-customer.component.css']
 })
-export class ListCustomerComponent implements OnInit {
+export class ListCustomerComponent implements OnInit, DoCheck{
+  p: number = 1;
   listCustomer: ICustomer[] = [];
   id: string = '';
-  constructor(private customerDAO: CustomerDAOService
-              ){
-
+  constructor(private customerDAO: CustomerDAOService,
+              private shareService: ShareServiceService){
   }
 
   ngOnInit(): void {
+    this.shareService.placeholderSearch = 'Search name customer';
     let status: boolean = this.customerDAO.statusSuccess != '';
-    this.listCustomer = this.customerDAO.findAll();
+    this.customerDAO.findAll().subscribe((customer) => this.listCustomer=customer);
     if (this.customerDAO.statusSuccess == 'create'){
       $("#modalTitle").text('Create customer');
       $("#modalContent").text('Create customer success');
@@ -39,33 +39,39 @@ export class ListCustomerComponent implements OnInit {
         status = false;
       }
     });
-
-
   }
 
   detail(id: string) {
-    let customer = this.customerDAO.findById(id);
-    if (customer != undefined){
-      $("#idCustomer").val(customer.id);
-      $("#nameCustomer").val(customer.name);
-      $("#addressCustomer").val(customer.address);
-      $("#emailCustomer").val(customer.email);
-      $("#idCardCustomer").val(customer.idCard);
-      $("#phoneNumberCustomer").val(customer.phoneNumber);
-      $("#typeCustomer").val(customer.customerType);
-      $("#dateOfBirthCustomer").val(customer.dateOfBirth.replace('/', '-').replace('/', '-'));
+    this.customerDAO.findById(id).subscribe((data: ICustomer) => {
+      $("#idCustomer").val(data.id);
+      $("#nameCustomer").val(data.name);
+      $("#addressCustomer").val(data.address);
+      $("#emailCustomer").val(data.email);
+      $("#idCardCustomer").val(data.idCard);
+      $("#phoneNumberCustomer").val(data.phoneNumber);
+      $("#typeCustomer").val(data.customerType.id);
+      $("#dateOfBirthCustomer").val(data.dateOfBirth.replace('/', '-').replace('/', '-'));
       let $radios = $('input:radio[name=gender]');
       if(!$radios.is(':checked')) {
-        $radios.filter('[value=' + customer.gender + ']').prop('checked', true);
+        $radios.filter('[value=' + data.gender + ']').prop('checked', true);
       }
-    }
+    });
   }
 
   delete(id: string){
-    let customer = this.customerDAO.findById(id);
-    if (customer != undefined){
-      $("#nameDelete").text(customer.name);
-      this.id = customer.id;
+   this.customerDAO.findById(id).subscribe((customer) => {
+     $("#nameDelete").text(customer.name);
+     this.id = customer.id;
+   });
+  }
+
+  ngDoCheck(): void {
+    if (this.shareService.statusSearch){
+      this.p=1;
+      this.customerDAO.search(this.shareService.keyword).subscribe(data => {
+        this.listCustomer = data;
+      });
+      this.shareService.statusSearch = false;
     }
   }
 }

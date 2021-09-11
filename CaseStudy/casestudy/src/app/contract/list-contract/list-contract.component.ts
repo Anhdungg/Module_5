@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {ShareServiceService} from "../../share-service.service";
 
 @Component({
   selector: 'app-list-contract',
@@ -7,9 +8,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ListContractComponent implements OnInit {
 
-  constructor() { }
+  constructor(private shareService: ShareServiceService) { }
 
   ngOnInit(): void {
+    this.shareService.placeholderSearch = 'Search id contract';
   }
 
 }

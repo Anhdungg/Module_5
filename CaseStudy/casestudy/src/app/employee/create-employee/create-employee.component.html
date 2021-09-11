@@ -1,1 +1,105 @@
-<p>create-employee works!</p>
+<p class="h2 text-center mt-4 mb-4" *ngIf="action == 'create'"> Create customer</p>
+<p class="h2 text-center mt-4 mb-4" *ngIf="action == 'edit'"> Edit customer</p>
+<div class="container">
+  <form [formGroup]="employeeForm" (ngSubmit)="action == 'create' ? onCreate() : onUpdate()" >
+    <div class="row mb-3">
+      <div class="form-group col-md-4">
+        <label for="id">ID <span class="text-danger">*</span></label>
+        <input type="text" class="form-control" id="id" formControlName="id"  *ngIf="action == 'create'"
+               [ngClass]="(employee.id?.touched || isSubmit) ? (employee.id?.invalid || existsId ? 'is-invalid' : 'is-valid') : ''">
+        <input type="text" class="form-control" id="id" formControlName="id"  *ngIf="action == 'edit'" readonly
+               [ngClass]="(employee.id?.touched || isSubmit) ? (employee.id?.invalid || existsId ? 'is-invalid' : 'is-valid') : ''">
+        <div class="invalid-feedback" *ngIf="employee.id?.errors?.pattern">ID phải có định dạng NV-XXXX (X là số từ 0-9)</div>
+        <div class="invalid-feedback" *ngIf="employee.id?.errors?.required">ID không được để trống</div>
+        <div class="invalid-feedback" *ngIf="existsId">ID đã tồn tại</div>
+      </div>
+      <div class="form-group col-md-4">
+        <label for="name">Name <span class="text-danger">*</span></label>
+        <input type="text" class="form-control" id="name" formControlName="name"
+               [ngClass]="(employee.name?.touched || isSubmit) ? (employee.name?.invalid ? 'is-invalid' : 'is-valid') : ''">
+        <div class="invalid-feedback" *ngIf="employee.name?.errors?.required">Name không được để trống</div>
+      </div>
+      <div class="form-group col-md-4">
+        <label for="salary">Salary <span class="text-danger">*</span></label>
+        <input type="text" class="form-control" id="salary" formControlName="salary"
+               [ngClass]="(employee.salary?.touched || isSubmit) ? (employee.salary?.invalid ? 'is-invalid' : 'is-valid') : ''">
+        <div class="invalid-feedback" *ngIf="employee.salary?.errors?.required">Salary không được để trống</div>
+      </div>
+    </div>
+    <div class="row mb-3">
+      <div class="form-group col-md">
+        <label for="address">Address <span class="text-danger">*</span></label>
+        <input type="text" class="form-control" id="address"  placeholder="1234 Main St" formControlName="address"
+               [ngClass]="(employee.address?.touched || isSubmit) ? (employee.address?.invalid ? 'is-invalid' : 'is-valid') : ''">
+        <div class="invalid-feedback" *ngIf="employee.address?.errors?.required">Address không được để trống</div>
+      </div>
+    </div>
+    <div class="row mb-3">
+      <div class="form-group col-md">
+        <label for="email">Email <span class="text-danger">*</span></label>
+        <input type="email" class="form-control" id="email" placeholder="XXX@xxx.xxx" formControlName="email"
+               [ngClass]="(employee.email?.touched || isSubmit) ? (employee.email?.invalid ? 'is-invalid' : 'is-valid') : ''">
+        <div class="invalid-feedback" *ngIf="employee.email?.errors?.required">Email không được để trống</div>
+        <div class="invalid-feedback" *ngIf="employee.email?.errors?.email">Email sai định dạng</div>
+      </div>
+    </div>
+    <div class="row mb-3">
+      <div class="form-group col-md-4">
+        <label for="idCard">ID Card <span class="text-danger">*</span></label>
+        <input type="text" class="form-control" id="idCard" placeholder="XXXXXXXXX" formControlName="idCard"
+               [ngClass]="(employee.idCard?.touched || isSubmit) ? (employee.idCard?.invalid ? 'is-invalid' : 'is-valid') : ''">
+        <div class="invalid-feedback" *ngIf="employee.idCard?.errors?.required">ID card không được để trống</div>
+        <div class="invalid-feedback" *ngIf="employee.idCard?.errors?.pattern">ID card phải có 9-12 chữ số</div>
+      </div>
+      <div class="form-group col-md-4">
+        <label for="phoneNumber">Phone number <span class="text-danger">*</span></label>
+        <input type="text" class="form-control" id="phoneNumber"  placeholder="XXX" formControlName="phoneNumber"
+               [ngClass]="(employee.phoneNumber?.touched || isSubmit) ? (employee.phoneNumber?.invalid ? 'is-invalid' : 'is-valid') : ''">
+        <div class="invalid-feedback" *ngIf="employee.phoneNumber?.errors?.required">Phone number không được để trống</div>
+        <div class="invalid-feedback" *ngIf="employee.phoneNumber?.errors?.pattern">Phone number sai định dạng</div>
+      </div>
+      <div class="form-group col-md-4">
+        <label for="dayOfBirth">Date of birth <span class="text-danger">*</span></label>
+        <input type="date" class="form-control" id="dayOfBirth" formControlName="dateOfBirth"
+               [ngClass]="(employee.dateOfBirth?.touched || isSubmit) ? (employee.dateOfBirth?.invalid ? 'is-invalid' : 'is-valid') : ''">
+        <div class="invalid-feedback" *ngIf="employee.dateOfBirth?.errors?.required">Date of birth không được để trống</div>
+        <div class="invalid-feedback" *ngIf="employee.dateOfBirth?.errors?.valiAge">Khách hàng phải lớn hơn 18 tuổi</div>
+      </div>
+    </div>
+    <div class="row mb-3">
+      <div class="form-group col-md-4">
+        <label for="position">Position <span class="text-danger">*</span></label>
+        <select  id="position" class="form-select" formControlName="position" [compareWith]="compareFn"
+                 [ngClass]="(employee.position?.touched || isSubmit) ? (employee.position?.invalid ? 'is-invalid' : 'is-valid') : ''">
+          <option selected disabled value="">Choose...</option>
+          <option *ngFor="let position of listPosition" [ngValue]="position">{{position.name}}</option>
+        </select>
+        <div class="invalid-feedback" *ngIf="employee.position?.errors?.required">Hãy chọn vị trí</div>
+      </div>
+      <div class="form-group col-md-4">
+        <label for="educationDegree">Education Degree <span class="text-danger">*</span></label>
+        <select  id="educationDegree" class="form-select" formControlName="educationDegree" [compareWith]="compareFn"
+                 [ngClass]="(employee.educationDegree?.touched || isSubmit) ? (employee.educationDegree?.invalid ? 'is-invalid' : 'is-valid') : ''">
+          <option selected disabled value="">Choose...</option>
+          <option *ngFor="let education of listEducation" [ngValue]="education">{{education.name}}</option>
+        </select>
+        <div class="invalid-feedback" *ngIf="employee.educationDegree?.errors?.required">Hãy chọn trình độ học vấn</div>
+      </div>
+      <div class="form-group col-md-4">
+        <label for="division">Division <span class="text-danger">*</span></label>
+        <select  id="division" class="form-select" formControlName="division" [compareWith]="compareFn"
+                 [ngClass]="(employee.division?.touched || isSubmit) ? (employee.division?.invalid ? 'is-invalid' : 'is-valid') : ''">
+          <option selected disabled value="">Choose...</option>
+          <option *ngFor="let division of listDivision" [ngValue]="division">{{division.name}}</option>
+        </select>
+        <div class="invalid-feedback" *ngIf="employee.educationDegree?.errors?.required">Hãy chọn bộ phận</div>
+      </div>
+    </div>
+    <div class="d-flex mt-4">
+      <a class="btn btn-secondary ms-auto me-1" routerLink="/employee/list">Back</a>
+      <button type="submit" class="btn btn-primary ms-1 me-auto" *ngIf="action == 'create'">Create</button>
+      <button type="submit" class="btn btn-primary ms-1 me-auto" *ngIf="action == 'edit'">Update</button>
+    </div>
+  </form>
+  <pre>{{employeeForm.value | json}}</pre>
+</div>

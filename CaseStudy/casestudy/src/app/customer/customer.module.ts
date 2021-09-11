@@ -6,6 +6,8 @@ import {ListCustomerComponent} from "./list-customer/list-customer.component";
 import {ReactiveFormsModule} from "@angular/forms";
 import { DeleteCustomerComponent } from './delete-customer/delete-customer.component';
 import { EditCustomerComponent } from './edit-customer/edit-customer.component';
+import {NgxPaginationModule} from "ngx-pagination";
+import {HttpClientModule} from "@angular/common/http";
 
 const routes: Routes = [
   {path: 'customer', redirectTo: 'customer/list', pathMatch: 'full'},
@@ -25,7 +27,9 @@ const routes: Routes = [
   imports: [
     CommonModule,
     RouterModule.forChild(routes),
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgxPaginationModule,
+    HttpClientModule
   ]
 })
 export class CustomerModule { }

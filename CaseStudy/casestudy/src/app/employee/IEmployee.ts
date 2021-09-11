@@ -1,5 +1,9 @@
+import {Position} from "./Position";
+import {EducationDegree} from "./EducationDegree";
+import {Division} from "./Division";
+
 export class IEmployee {
-  private _id: number;
+  private _id: string;
   private _name: string;
   private _dateOfBirth: string;
   private _idCard: string;
@@ -7,12 +11,12 @@ export class IEmployee {
   private _phoneNumber: string;
   private _email: string;
   private _address: string;
-  private _position: string;
-  private _educationDegree: string;
-  private _division: string;
+  private _position: Position;
+  private _educationDegree: EducationDegree;
+  private _division: Division;
 
-  constructor(id: number, name: string, dateOfBirth: string, idCard: string, salary: number, phoneNumber: string,
-              email: string, address: string, position: string, educationDegree: string, division: string) {
+  constructor(id: string, name: string, dateOfBirth: string, idCard: string, salary: number, phoneNumber: string,
+              email: string, address: string, position: Position, educationDegree: EducationDegree, division: Division) {
     this._id = id;
     this._name = name;
     this._dateOfBirth = dateOfBirth;
@@ -27,11 +31,11 @@ export class IEmployee {
   }
 
 
-  get id(): number {
+  get id(): string {
     return this._id;
   }
 
-  set id(value: number) {
+  set id(value: string) {
     this._id = value;
   }
 
@@ -91,27 +95,27 @@ export class IEmployee {
     this._address = value;
   }
 
-  get position(): string {
+  get position(): Position {
     return this._position;
   }
 
-  set position(value: string) {
+  set position(value: Position) {
     this._position = value;
   }
 
-  get educationDegree(): string {
+  get educationDegree(): EducationDegree {
     return this._educationDegree;
   }
 
-  set educationDegree(value: string) {
+  set educationDegree(value: EducationDegree) {
     this._educationDegree = value;
   }
 
-  get division(): string {
+  get division(): Division {
     return this._division;
   }
 
-  set division(value: string) {
+  set division(value: Division) {
     this._division = value;
   }
 }

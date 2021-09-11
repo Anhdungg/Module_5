@@ -22,8 +22,9 @@
           <a class="nav-link " aria-current="page" routerLink="/contract" [routerLinkActive]="['active']">Contract</a>
         </li>
       </ul>
-      <form class="d-flex">
-        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+      <form class="d-flex w-25" [formGroup]="formSearch" (ngSubmit)="onSubmit()">
+        <input class="form-control me-2" type="search" [placeholder]="placeholderSearch.placeholderSearch"
+               aria-label="Search" formControlName="keyword">
         <button class="btn btn-outline-success" type="submit">Search</button>
       </form>
     </div>
