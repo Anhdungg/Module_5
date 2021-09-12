@@ -1,9 +1,13 @@
-import {Component, DoCheck, OnInit} from '@angular/core';
+import {Component, DoCheck, Inject, OnInit} from '@angular/core';
 import {CustomerDAOService} from "../customer-dao.service";
 import {ICustomer} from "../ICustomer";
-import * as $ from "jquery";
 import {ShareServiceService} from "../../share-service.service";
+import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from "@angular/material/dialog";
 
+interface StatusAction {
+  title: string,
+  content: string
+}
 
 @Component({
   selector: 'app-list-customer',
@@ -15,53 +19,45 @@ export class ListCustomerComponent implements OnInit, DoCheck{
   listCustomer: ICustomer[] = [];
   id: string = '';
   constructor(private customerDAO: CustomerDAOService,
-              private shareService: ShareServiceService){
+              private shareService: ShareServiceService,
+              private dialog: MatDialog){
   }
 
   ngOnInit(): void {
     this.shareService.placeholderSearch = 'Search name customer';
-    let status: boolean = this.customerDAO.statusSuccess != '';
     this.customerDAO.findAll().subscribe((customer) => this.listCustomer=customer);
+    let statusAction: StatusAction | null = null;
     if (this.customerDAO.statusSuccess == 'create'){
-      $("#modalTitle").text('Create customer');
-      $("#modalContent").text('Create customer success');
+      statusAction = {title: 'Create customer', content: 'Create customer success'}
     }else if (this.customerDAO.statusSuccess == 'edit'){
-      $("#modalTitle").text('Update customer');
-      $("#modalContent").text('Update customer success');
+      statusAction = {title: 'Update customer', content: 'Update customer success'}
     }if (this.customerDAO.statusSuccess == 'delete'){
-      $("#modalTitle").text('Delete customer');
-      $("#modalContent").text('Delete customer success');
+      statusAction = {title: 'Delete customer', content: 'Delete customer success'}
+    }
+    if(this.customerDAO.statusSuccess != ''){
+      if(statusAction != null){
+        setTimeout(() => {
+          this.dialog.open(ModalStatus, {width: '40%', autoFocus: false, data: statusAction, position: {top: '5%'}});
+        }, 400);
+
+      }
     }
     this.customerDAO.statusSuccess = '';
-    $(document).ready(function () {
-      if (status){
-        $("#launch").click();
-        status = false;
-      }
-    });
   }
 
   detail(id: string) {
+
     this.customerDAO.findById(id).subscribe((data: ICustomer) => {
-      $("#idCustomer").val(data.id);
-      $("#nameCustomer").val(data.name);
-      $("#addressCustomer").val(data.address);
-      $("#emailCustomer").val(data.email);
-      $("#idCardCustomer").val(data.idCard);
-      $("#phoneNumberCustomer").val(data.phoneNumber);
-      $("#typeCustomer").val(data.customerType.id);
-      $("#dateOfBirthCustomer").val(data.dateOfBirth.replace('/', '-').replace('/', '-'));
-      let $radios = $('input:radio[name=gender]');
-      if(!$radios.is(':checked')) {
-        $radios.filter('[value=' + data.gender + ']').prop('checked', true);
-      }
+      this.dialog.open(CustomerDetail, {width: '60%', autoFocus: false, data: data});
+      // dialogRef.afterClosed().subscribe(result => {
+      //   console.log(`Dialog result: ${result}`);
+      // });
     });
   }
 
   delete(id: string){
    this.customerDAO.findById(id).subscribe((customer) => {
-     $("#nameDelete").text(customer.name);
-     this.id = customer.id;
+     this.dialog.open(ConfirmDelete, {width: '40%', autoFocus: false, data: customer, position: {top: '5%'}});
    });
   }
 
@@ -73,5 +69,35 @@ export class ListCustomerComponent implements OnInit, DoCheck{
       });
       this.shareService.statusSearch = false;
     }
+  }
+}
+
+@Component({
+  selector: 'dialog-content-example-dialog',
+  templateUrl: './customer-detail.html',
+})
+export class CustomerDetail{
+  constructor(public dialogRef: MatDialogRef<CustomerDetail>,
+              @Inject(MAT_DIALOG_DATA) public data: ICustomer) {
+  }
+}
+
+@Component({
+  selector: 'dialog-content-example-dialog',
+  templateUrl: './confirm_delete.html',
+})
+export class ConfirmDelete{
+  constructor(public dialogRef: MatDialogRef<ConfirmDelete>,
+              @Inject(MAT_DIALOG_DATA) public data: ICustomer) {
+  }
+}
+
+@Component({
+  selector: 'dialog-content-example-dialog',
+  templateUrl: './modal_status.html',
+})
+export class ModalStatus{
+  constructor(public dialogRef: MatDialogRef<ModalStatus>,
+              @Inject(MAT_DIALOG_DATA) public data: StatusAction) {
   }
 }

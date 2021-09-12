@@ -1,0 +1,61 @@
+<h2 mat-dialog-title>Detail customer</h2>
+<mat-dialog-content class="mat-typography">
+  <div class="row mb-3">
+    <div class="form-group col-md-6">
+      <label for="idCustomer">ID </label>
+      <input type="text" class="form-control" id="idCustomer" value="{{data.id}}" readonly>
+    </div>
+    <div class="form-group col-md-6">
+      <label for="nameCustomer">Name </label>
+      <input type="text" class="form-control" id="nameCustomer" value="{{data.name}}" readonly>
+    </div>
+  </div>
+  <div class="row mb-3">
+    <div class="form-group col-md">
+      <label for="addressCustomer">Address </label>
+      <input type="text" class="form-control" id="addressCustomer" value="{{data.address}}" readonly>
+    </div>
+  </div>
+  <div class="row mb-3">
+    <div class="form-group col-md">
+      <label for="emailCustomer">Email </label>
+      <input type="email" class="form-control" id="emailCustomer" value="{{data.email}}" readonly>
+    </div>
+  </div>
+  <div class="row mb-3">
+    <div class="form-group col-md-6">
+      <label for="idCardCustomer">ID Card </label>
+      <input type="text" class="form-control" id="idCardCustomer" value="{{data.idCard}}" readonly>
+    </div>
+    <div class="form-group col-md-6">
+      <label for="phoneNumberCustomer">Phone number </label>
+      <input type="text" class="form-control" id="phoneNumberCustomer" value="{{data.phoneNumber}}" readonly>
+    </div>
+  </div>
+  <div class="row mb-3">
+    <div class="form-group col-md-3">
+      <label>Gender</label>
+      <div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" id="male" name="gender" value="true" [checked]="data.gender" disabled>
+          <label class="form-check-label" for="male">Male</label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" id="female" name="gender" value="false" [checked]="!data.gender" disabled>
+          <label class="form-check-label" for="female">Female</label>
+        </div>
+      </div>
+    </div>
+    <div class="form-group col-md-3">
+      <label for="dateOfBirthCustomer">Date of birth</label>
+      <input type="date" class="form-control" id="dateOfBirthCustomer" value="{{data.dateOfBirth}}" readonly>
+    </div>
+    <div class="form-group col-md">
+      <label for="typeCustomer">Type</label>
+      <input type="text" class="form-control" id="typeCustomer" value="{{data.customerType.name}}" readonly>
+    </div>
+  </div>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>Close</button>
+</mat-dialog-actions>

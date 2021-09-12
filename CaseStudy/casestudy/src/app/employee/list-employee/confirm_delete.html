@@ -1,0 +1,8 @@
+<h2 mat-dialog-title>Delete customer</h2>
+<mat-dialog-content class="mat-typography">
+  Delete employee name: <span class="text-danger" >{{data.name}}</span>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-dialog-close class="btn btn-secondary mr-2" >Close</button>
+  <a mat-dialog-close class="btn btn-danger" routerLink="/employee/delete" [queryParams]="{id: data.id}">Delete</a>
+</mat-dialog-actions>

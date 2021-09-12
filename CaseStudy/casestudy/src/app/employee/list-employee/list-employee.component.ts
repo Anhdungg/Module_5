@@ -1,11 +1,16 @@
-import {Component, DoCheck, OnInit} from '@angular/core';
-import * as $ from "jquery";
+import {Component, DoCheck, Inject, OnInit} from '@angular/core';
 import {IEmployee} from "../IEmployee";
 import {EmployeeDaoService} from "../employee-dao.service";
 import {Position} from "../Position";
 import {EducationDegree} from "../EducationDegree";
 import {Division} from "../Division";
 import {ShareServiceService} from "../../share-service.service";
+import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from "@angular/material/dialog";
+
+interface StatusAction {
+  title: string,
+  content: string
+}
 
 @Component({
   selector: 'app-list-employee',
@@ -20,7 +25,8 @@ export class ListEmployeeComponent implements OnInit, DoCheck {
   id!: string;
   p: number = 1;
   constructor(private employeeDAO: EmployeeDaoService,
-              private shareService: ShareServiceService){
+              private shareService: ShareServiceService,
+              private dialog: MatDialog){
   }
 
   ngOnInit(): void {
@@ -29,46 +35,34 @@ export class ListEmployeeComponent implements OnInit, DoCheck {
     this.employeeDAO.findAllEducation().subscribe(data => this.listEducation = data);
     this.employeeDAO.findAllDivision().subscribe(data => this.listDivision = data);
     this.employeeDAO.findAll().subscribe(data => this.listEmployee = data);
-    let status: boolean = this.employeeDAO.statusSuccess != '';
+    let statusAction: StatusAction | null = null;
     if (this.employeeDAO.statusSuccess == 'create'){
-      $("#modalTitle").text('Create employee');
-      $("#modalContent").text('Create employee success');
+      statusAction = {title: 'Create employee', content: 'Create employee success'};
     }else if (this.employeeDAO.statusSuccess == 'edit'){
-      $("#modalTitle").text('Update employee');
-      $("#modalContent").text('Update employee success');
+      statusAction = {title: 'Update employee', content: 'Update employee success'};
     }if (this.employeeDAO.statusSuccess == 'delete'){
-      $("#modalTitle").text('Delete employee');
-      $("#modalContent").text('Delete employee success');
+      statusAction = {title: 'Delete employee', content: 'Delete employee success'};
+    }
+    if(this.employeeDAO.statusSuccess != ''){
+      if(statusAction != null){
+        setTimeout(() => {
+          this.dialog.open(ModalStatus, {width: '40%', autoFocus: false, data: statusAction, position: {top: '5%'}});
+        }, 400);
+
+      }
     }
     this.employeeDAO.statusSuccess = '';
-    $(document).ready(function () {
-      if (status){
-        $("#launch").click();
-        status = false;
-      }
-    });
   }
 
   detail(id: string) {
     this.employeeDAO.findById(id).subscribe(employee => {
-      $("#idEmployee").val(employee.id);
-      $("#nameEmployee").val(employee.name);
-      $("#salaryEmployee").val(employee.salary);
-      $("#addressEmployee").val(employee.address);
-      $("#emailEmployee").val(employee.email);
-      $("#idCardEmployee").val(employee.idCard);
-      $("#phoneNumberEmployee").val(employee.phoneNumber);
-      $("#positionEmployee").val(employee.position.id);
-      $("#educationDegreeEmployee").val(employee.educationDegree.id);
-      $("#divisionEmployee").val(employee.division.id);
-      $("#dateOfBirthEmployee").val(employee.dateOfBirth.replace('/', '-').replace('/', '-'));
+      this.dialog.open(EmployeeDetail, {width: '60%', autoFocus: false, data: employee});
     });
   }
 
   delete(id: string){
     this.employeeDAO.findById(id).subscribe( employee => {
-      $("#nameDelete").text(employee.name);
-      this.id = employee.id;
+      this.dialog.open(ConfirmDelete, {width: '40%', autoFocus: false, data: employee, position: {top: '5%'}});
     });
   }
 
@@ -80,5 +74,35 @@ export class ListEmployeeComponent implements OnInit, DoCheck {
       });
       this.shareService.statusSearch = false;
     }
+  }
+}
+
+@Component({
+  selector: 'dialog-content-example-dialog',
+  templateUrl: './employee-detail.html',
+})
+export class EmployeeDetail{
+  constructor(public dialogRef: MatDialogRef<EmployeeDetail>,
+              @Inject(MAT_DIALOG_DATA) public data: IEmployee) {
+  }
+}
+
+@Component({
+  selector: 'dialog-content-example-dialog',
+  templateUrl: './confirm_delete.html',
+})
+export class ConfirmDelete{
+  constructor(public dialogRef: MatDialogRef<ConfirmDelete>,
+              @Inject(MAT_DIALOG_DATA) public data: IEmployee) {
+  }
+}
+
+@Component({
+  selector: 'dialog-content-example-dialog',
+  templateUrl: './modal_status.html',
+})
+export class ModalStatus{
+  constructor(public dialogRef: MatDialogRef<ModalStatus>,
+              @Inject(MAT_DIALOG_DATA) public data: StatusAction) {
   }
 }

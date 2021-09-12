@@ -2,12 +2,17 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {RouterModule, Routes} from "@angular/router";
 import {CreateCustomerComponent} from "./create-customer/create-customer.component";
-import {ListCustomerComponent} from "./list-customer/list-customer.component";
+import {
+  ConfirmDelete,
+  CustomerDetail,
+  ListCustomerComponent, ModalStatus
+} from "./list-customer/list-customer.component";
 import {ReactiveFormsModule} from "@angular/forms";
 import { DeleteCustomerComponent } from './delete-customer/delete-customer.component';
 import { EditCustomerComponent } from './edit-customer/edit-customer.component';
 import {NgxPaginationModule} from "ngx-pagination";
-import {HttpClientModule} from "@angular/common/http";
+import {MatDialogModule} from "@angular/material/dialog";
+import {MatButtonModule} from "@angular/material/button";
 
 const routes: Routes = [
   {path: 'customer', redirectTo: 'customer/list', pathMatch: 'full'},
@@ -22,14 +27,18 @@ const routes: Routes = [
     CreateCustomerComponent,
     ListCustomerComponent,
     DeleteCustomerComponent,
-    EditCustomerComponent
+    EditCustomerComponent,
+    CustomerDetail,
+    ConfirmDelete,
+    ModalStatus
   ],
-  imports: [
-    CommonModule,
-    RouterModule.forChild(routes),
-    ReactiveFormsModule,
-    NgxPaginationModule,
-    HttpClientModule
-  ]
+    imports: [
+        CommonModule,
+        RouterModule.forChild(routes),
+        ReactiveFormsModule,
+        NgxPaginationModule,
+        MatDialogModule,
+        MatButtonModule
+    ]
 })
 export class CustomerModule { }

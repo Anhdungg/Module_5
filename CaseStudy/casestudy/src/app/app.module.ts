@@ -14,6 +14,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import {NgxPaginationModule} from "ngx-pagination";
 import {HttpClientModule} from "@angular/common/http";
 import {ReactiveFormsModule} from "@angular/forms";
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {MaterialModule} from "./material-module";
 
 @NgModule({
   declarations: [
@@ -32,7 +34,9 @@ import {ReactiveFormsModule} from "@angular/forms";
         NgbModule,
         HttpClientModule,
         NgxPaginationModule,
-        ReactiveFormsModule
+        ReactiveFormsModule,
+        BrowserAnimationsModule,
+        MaterialModule
     ],
   providers: [],
   bootstrap: [AppComponent]

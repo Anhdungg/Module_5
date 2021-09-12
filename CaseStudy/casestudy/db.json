@@ -93,20 +93,6 @@
       }
     },
     {
-      "id": "KH-0011",
-      "name": "Anh Dũng",
-      "dateOfBirth": "1999-09-11",
-      "gender": "true",
-      "idCard": "212388701",
-      "phoneNumber": "0917937297",
-      "email": "ledung.ht17@gmail.com",
-      "address": "04, hoàng sỹ khải, đà nẵng",
-      "customerType": {
-        "id": 1,
-        "name": "Diamond"
-      }
-    },
-    {
       "id": "KH-0010",
       "name": "Van Kien",
       "dateOfBirth": "1997-09-01",
@@ -118,6 +104,34 @@
       "customerType": {
         "id": 2,
         "name": "Platinium"
+      }
+    },
+    {
+      "id": "KH-0011",
+      "name": "Xuan Son",
+      "dateOfBirth": "1998-09-12",
+      "gender": "true",
+      "idCard": "434343434",
+      "phoneNumber": "0914343433",
+      "email": "xuanson@gmail.com",
+      "address": "Da Nang",
+      "customerType": {
+        "id": 3,
+        "name": "Gold"
+      }
+    },
+    {
+      "id": "KH-0000",
+      "name": "Anh Dũng",
+      "dateOfBirth": "1888-09-12",
+      "gender": "true",
+      "idCard": "212388701",
+      "phoneNumber": "0917937297",
+      "email": "ledung.ht17@gmail.com",
+      "address": "04, hoàng sỹ khải, đà nẵng",
+      "customerType": {
+        "id": 1,
+        "name": "Diamond"
       }
     }
   ],
@@ -185,9 +199,8 @@
   ],
   "employee": [
     {
-      "id": "NV-0001",
       "name": "Mai Thi Thanh",
-      "dateOfBirth": "1977-08-31",
+      "dateOfBirth": "1972-08-31",
       "idCard": "111222333",
       "salary": "5000000",
       "phoneNumber": "0914444446",
@@ -204,7 +217,8 @@
       "division": {
         "id": 4,
         "name": "Quản lý"
-      }
+      },
+      "id": "NV-0001"
     },
     {
       "id": "NV-0002",
@@ -270,6 +284,50 @@
       "division": {
         "id": 3,
         "name": "Phục vụ"
+      }
+    },
+    {
+      "id": "NV-0005",
+      "name": "Van Kien",
+      "dateOfBirth": "1995-09-24",
+      "idCard": "373737373",
+      "salary": "2500000",
+      "phoneNumber": "0913737373",
+      "email": "vankien@gmail.com",
+      "address": "Nghe An",
+      "position": {
+        "id": 1,
+        "name": "Lễ tân"
+      },
+      "educationDegree": {
+        "id": 2,
+        "name": "Cao đẳng"
+      },
+      "division": {
+        "id": 1,
+        "name": "Sale-Marketing"
+      }
+    },
+    {
+      "id": "NV-0006",
+      "name": "Dieu Linh",
+      "dateOfBirth": "1995-04-24",
+      "idCard": "383838388",
+      "salary": "5000000",
+      "phoneNumber": "0913838383",
+      "email": "dieulinh@gmail.com",
+      "address": "Ha Tinh",
+      "position": {
+        "id": 4,
+        "name": "Giám sát"
+      },
+      "educationDegree": {
+        "id": 2,
+        "name": "Cao đẳng"
+      },
+      "division": {
+        "id": 2,
+        "name": "Hành chính"
       }
     }
   ]

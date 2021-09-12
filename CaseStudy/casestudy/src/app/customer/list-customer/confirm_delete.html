@@ -1,0 +1,26 @@
+<!--<div class="modal fade " id="modalDelete" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">-->
+<!--  <div class="modal-dialog ">-->
+<!--    <div class="modal-content">-->
+<!--      <div class="modal-header">-->
+<!--        <h5 class="modal-title" >Delete customer</h5>-->
+<!--        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>-->
+<!--      </div>-->
+<!--      <div class="modal-body">-->
+<!--        Delete customer name: <span class="text-danger" id="nameDelete"></span>-->
+<!--      </div>-->
+<!--      <div class="modal-footer">-->
+<!--        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>-->
+<!--        <a type="button" class="btn btn-danger" data-bs-dismiss="modal" routerLink="/customer/delete" [queryParams]="{id: id}">Delete</a>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--</div>-->
+
+<h2 mat-dialog-title>Delete customer</h2>
+<mat-dialog-content class="mat-typography">
+  Delete customer name: <span class="text-danger" >{{data.name}}</span>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-dialog-close class="btn btn-secondary mr-2" >Close</button>
+  <a mat-dialog-close class="btn btn-danger" routerLink="/customer/delete" [queryParams]="{id: data.id}">Delete</a>
+</mat-dialog-actions>
